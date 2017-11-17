@@ -1,0 +1,82 @@
+" Use Vim settings, rather then Vi settings. This setting must be as early as
+" possible, as it has side effects.
+set nocompatible
+
+set backspace=2   " Backspace deletes like most programs in insert mode
+set nobackup
+set nowritebackup
+set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set history=50
+set ruler         " show the cursor position all the time
+set showcmd       " display incomplete commands
+set incsearch     " do incremental searching
+set laststatus=2  " Always display the status line
+set autowrite     " Automatically :write before running commands
+set confirm       " Need confrimation while exit
+set fileencodings=utf-8,gb18030,gbk,big5
+set fileencoding=utf-8
+set encoding=utf-8
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+syntax on
+
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+filetype plugin indent on
+
+" Softtabs, 8 spaces
+set tabstop=8
+set shiftwidth=8
+set shiftround
+set expandtab
+
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+
+" Color scheme
+
+" Make it obvious where 80 characters is
+set textwidth=80
+
+" Numbers
+set number
+set numberwidth=4
+
+" Nerd Tree
+let NERDChristmasTree=0
+let NERDTreeWinSize=30
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="right"
+nmap <F2> :NERDTreeToggle<cr>
+
+" Tagbar
+let g:tagbar_left = 1
+let g:tagbar_width=25
+let g:tagbar_autofocus=1
+nmap <F3> :TagbarToggle<CR>
+
+nmap <F4> :SrcExplToggle<CR>
+let g:Srcexpl_winHeight = 8
+" Set 100 ms for refreshing the Source Explorer 
+let g:SrcExpl_refreshTime = 1000
+" Set "Enter" key to jump into the exact definition context 
+let g:SrcExpl_jumpKey = "<ENTER>"
+" Set "Space" key for back from the definition context 
+let g:SrcExpl_gobackKey = "<SPACE>"
+let g:SrcExpl_pluginList = [
+          \ "__Tag_List__",
+                  \ "_NERD_tree_"
+                     \ ]
+" Javascript syntax hightlight
+syntax enable
+
+nmap <C-H> <C-W>h
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
+
