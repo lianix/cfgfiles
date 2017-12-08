@@ -31,13 +31,16 @@ filetype plugin indent on
 set tabstop=8
 set shiftwidth=8
 set shiftround
-set expandtab
+set noexpandtab
+set autoindent
+set smarttab
 
 " enable mouse
 set mouse=a
 
 " Display extra whitespace
-set list listchars=tab:»·,trail:·
+set list listchars=tab:»-,trail:·
+",eol:$
 
 " Color scheme
 
@@ -65,21 +68,49 @@ nmap <F3> :TagbarToggle<CR>
 
 nmap <F4> :SrcExplToggle<CR>
 let g:Srcexpl_winHeight = 8
-" Set 100 ms for refreshing the Source Explorer 
+" Set 100 ms for refreshing the Source Explorer
 let g:SrcExpl_refreshTime = 1000
-" Set "Enter" key to jump into the exact definition context 
+" Set "Enter" key to jump into the exact definition context
 let g:SrcExpl_jumpKey = "<ENTER>"
-" Set "Space" key for back from the definition context 
+" Set "Space" key for back from the definition context
 let g:SrcExpl_gobackKey = "<SPACE>"
 let g:SrcExpl_pluginList = [
-          \ "__Tag_List__",
-                  \ "_NERD_tree_"
-                     \ ]
-" Javascript syntax hightlight
-syntax enable
+      \ "__Tag_List__",
+      \ "_NERD_tree_"
+      \ ]
+
+" Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+" create/update the tags file
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+
+" cscope setting
+if has("cscope")
+        set cscopetag
+        set cscopeverbose
+        set csto=0
+        set cst
+        set nocsverb
+        " add any database in current directory
+        if filereadable("cscope.out")
+            cs add cscope.out
+        " else add database pointed to by environment
+        elseif $CSCOPE_DB != ""
+            cs add $CSCOPE_DB
+        endif
+        set csverb
+
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+endif
 
 nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
-
