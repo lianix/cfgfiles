@@ -36,7 +36,7 @@ set autoindent
 set smarttab
 
 " enable mouse
-set mouse=a
+set mouse=v
 
 " Display extra whitespace
 set list listchars=tab:»-,trail:·
@@ -50,6 +50,9 @@ set textwidth=80
 " Numbers
 set number
 set numberwidth=4
+
+" use system clipboard
+set clipboard=unnamedplus
 
 " Nerd Tree
 let NERDChristmasTree=0
@@ -82,6 +85,9 @@ let g:SrcExpl_pluginList = [
 " Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
 " create/update the tags file
 let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+
+" ctags setting
+set tags=tags;
 
 " cscope setting
 if has("cscope")
